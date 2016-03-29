@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Keenmunity</title>
+
+    <script type="text/javascript">
+        window.keys = {
+            keen: {
+                project_id: '<%= env.KEEN_PROJECT_ID %>',
+                write_key: '<%= env.KEEN_WRITE_KEY %>'
+            },
+            mapbox: {
+                access_token: '<%= env.MAPBOX_ACCESS_TOKEN %>'
+            },
+            firebase: {
+                url: '<%= env.FIREBASE_URL %>'
+            }
+        }
+    </script>
+
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+    <script src='https://cdn.jsdelivr.net/superagent/0.18.0/superagent.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="https://keen.io/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css' />
+    <script src="https://d26b395fwzu5fz.cloudfront.net/3.0.7/keen.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./common-web.min.js"></script>
+    <link rel='stylesheet' href='./style.css' />
+    <link rel='stylesheet' href='./form.css' />
+
+    <script>
+      $(function() {
+        $( "#datepicker" ).datepicker();
+      });
+    </script>
+
+    <script type="text/javascript">
+    // initialize Keen IO CommonWeb package to track all of the things
+        CommonWeb.Keen.Client = new Keen({
+          projectId: keys.keen.project_id,
+          writeKey: keys.keen.write_key
+        });
+        CommonWeb.addGlobalProperties(CommonWeb.Keen.globalProperties);
+        CommonWeb.Callback = CommonWeb.Keen.Callback;
+    </script>
+
+</head>
+<body>
+
+    <header>
+      <span class="logo">Keen IO</span>
+      <button>Add Event</button>
+    </header>
+
+    <div class="loading-overlay">
+      <div class="content">
+        <h3>Welcome to the Keen IO community map!</h3><br>
+        <div class="say-hi">Hang out while I load all the data. There's quite a bit so it may take a sec.</div><br>
+        <ul>
+        <li>The clusters are full of user markers and those are blue.</li>
+        <li>There are red pins that represent past events.</li>
+        <li>All the markers a clickable, so click around and see what you find :D</li>
+        </ul>
+        <a href="#"id="get_started">Let's get started!</a>
+      </div>
+    </div>
+
+    <div id="event_form">
+    <!-- Popup Div Starts Here -->
+        <div id="popup_contact">
+        <!-- Contact Us Form -->
+            <form action="#" id="form" method="post" name="form">
+            <a href="#" id="exit_popup">x</a>
+            <h2>Enter Infos!</h2>
+            <hr>
+            <input id="name" name="name" placeholder="name" type="text">
+            <input id="datepicker" name="datepicker" placeholder="date" type="text">
+            <textarea id="msg" name="message" placeholder="description"></textarea>
+            <a href="javascript:check_empty();" id="submit">Send</a>
+            </form>
+        </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+    <div id='map'></div>
+    <script src='./map_interaction.js'></script>
+    <script src='./script.js'></script>
+    <script type="text/javascript">
+        // add a user-specific GUID to all events for tracking user flow
+        CommonWeb.trackSession();
+
+        // track the pageview
+        CommonWeb.trackPageview();
+
+        // track clicks for each link on the page
+        CommonWeb.trackClicks();
+
+        // track submissions for every form on the page
+        CommonWeb.trackFormSubmissions();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "keenmunity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "dotenv": "^1.1.0",
+    "express": "^4.12.3",
+    "firebase": "^2.2.7",
+    "jade": "^1.11.0",
+    "ejs": "^2.3.1",
+    "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "dotenv": "^1.2.0"
+  }
+}

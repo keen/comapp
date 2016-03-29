@@ -1,0 +1,55 @@
+body {
+  margin:0;
+  padding:0;
+}
+header {
+   height:50px;
+   width:100%; position:fixed;
+   display:block;
+   color: white;
+   padding-top:10px;
+   background-color:#000000;
+ }
+header .logo {
+  padding-left:10px;
+}
+header button {
+  float:right;
+  margin-right:10px;
+  margin-top:-5px;
+  background-color:white;
+  color:black;
+}
+#map {
+  position:absolute;
+  top:40px;
+  bottom:0;
+  width:100%;
+}
+.loading-overlay {
+  position:relative;
+  z-index:1;
+  padding-top:100px;
+  height:250px;
+  margin:15%;
+  border:2px solid black;
+  background-color:whitesmoke;
+}
+.loading-overlay .content {
+  margin-top: -80px;
+}
+.loading-overlay .content a {
+  padding-left: 42%;
+}
+.loading-overlay .content .say-hi {
+  margin: 0 10px;
+}
+.loading-overlay .content h3 {
+  text-align:center;
+}
+.leaflet-container .leaflet-control-attribution {
+  display:none;
+}
+.mapbox-logo.leaflet-control.mapbox-logo-true {
+  display:none;
+}
